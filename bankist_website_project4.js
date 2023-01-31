@@ -45,3 +45,8 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+//Smooth Scrolling
+btnScrollTo.addEventListener('click', function () {
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
