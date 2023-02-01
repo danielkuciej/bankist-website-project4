@@ -58,3 +58,20 @@ document.querySelectorAll('.nav__link').forEach(function (el) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+//Implement content field in section 2
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  //Remove active classes
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  //Active tab
+  clicked.classList.add('operations__tab--active');
+
+  //Active content area
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
