@@ -141,4 +141,47 @@ const imgObserver = new IntersectionObserver(loadImg, {
 });
 
 imgTargets.forEach(img => imgObserver.observe(img));
-Ŕ;
+
+//Slider
+const slider = document.querySelector('.slider');
+let currentSlide = 0;
+const maxSlide = slides.length;
+
+slides.forEach(
+  (slide, index) => (slide.style.transform = `translateX(${100 * index}%)`)
+);
+
+//Next Slide
+const nextSlide = function () {
+  if (currentSlide === maxSlide - 1) currentSlide = 0;
+  else currentSlide++;
+
+  slides.forEach(
+    (slide, index) =>
+      (slide.style.transform = `translateX(${100 * (index - currentSlide)}%)`)
+  );
+};
+
+//Previous slide
+const prevSlide = function () {
+  if (currentSlide === 0) currentSlide = maxSlide - 1;
+  else currentSlide--;
+
+  slides.forEach(
+    (slide, index) =>
+      (slide.style.transform = `translateX(${100 * (index - currentSlide)}%)`)
+  );
+};
+
+btnRight.addEventListener('click', function () {
+  nextSlide();
+});
+
+btnLeft.addEventListener('click', function () {
+  prevSlide();
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowLeft') prevSlide();
+  if (e.key === 'ArrowRight') nextSlide();
+});
