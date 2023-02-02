@@ -89,7 +89,6 @@ const handleHover = function (e, opacity) {
     siblings.forEach(el => {
       if (el !== link) el.style.opacity = opacity;
     });
-    logo.style.opacity = opacity;
   }
 };
 
@@ -117,3 +116,29 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 
 headerObserver.observe(header);
+
+//Lazy loading image
+const imgTargets = document.querySelectorAll('img[data-src]');
+const loadImg = function (entries, observe) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  //Replace src wit data-src
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observe.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
+Ŕ;
