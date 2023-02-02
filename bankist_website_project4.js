@@ -210,10 +210,11 @@ const activeDot = function (slide) {
     .classList.add('dots__dot--active');
 };
 activeDot(currentSlide);
-Ŕ;
+
 dotContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('dots__dot')) {
     const { slide } = e.target.dataset;
+    // if (slide === 1) `translateX(${slide * 100}%)`;
   }
 
   activeDot(currentSlide);
